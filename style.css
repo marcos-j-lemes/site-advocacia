@@ -29,42 +29,113 @@ body {
 /* =========================
    NAVBAR
 ========================= */
+
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
   background: rgba(6,37,61,0.95);
   z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar-container {
   max-width: 1280px;
   margin: auto;
-  padding: 1.4rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   color: var(--cor-branco);
-  text-decoration: none;
   letter-spacing: 1px;
+  transition: opacity 0.3s ease;
+}
+
+.logo img {
+  height: 80px; /* Tamanho adequado para navbar */
+  width: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+  transform: scale(1.05);
+}
+
+.logo:hover {
+  opacity: 0.9;
+}
+
+.logo span {
+  font-weight: 600;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 2.2rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
   color: var(--cor-branco);
   text-decoration: none;
   font-size: 1.05rem;
+  transition: all 0.3s ease;
+  position: relative;
 }
+
+.nav-links a:hover {
+  color: goldenrod;
+  transform: translateY(-2px);
+}
+
+/* Linha animada ao hover (opcional, mas fica elegante) */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: goldenrod;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 1rem 1.5rem;
+  }
+  
+  .logo {
+    font-size: 1.4rem;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .nav-links {
+    gap: 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
 
 /* =========================
    HERO (AGORA DE VERDADE)
@@ -73,19 +144,35 @@ body {
   min-height: 100vh;
   background-image:
     linear-gradient(rgba(6,37,61,0.55), rgba(6,37,61,0.55)),
-    url('https://via.placeholder.com/1920x1080');
+    url('./martelo-e-balanca-da-justica-na-sala-do-tribunal_23-2151998155.avif');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 
   display: flex;
   align-items: center;
+  position: relative; /* Adicionar */
 }
 
 .hero-content {
   max-width: 720px;
   margin-left: 8%;
-  padding-top: 6rem; /* compensa navbar */
+  padding-top: 6rem;
+}
+
+/* Logo pequeno e discreto */
+.hero-logo {
+  position: absolute;
+  top: 8rem; /* Abaixo da navbar */
+  left: 2%;
+  width: 700px; /* Tamanho pequeno */
+  height: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.hero-logo:hover {
+  opacity: 1;
 }
 
 .hero-content h1 {
@@ -103,11 +190,22 @@ body {
 }
 
 /* =========================
+   dispositivos moveis
+========================= */
+@media (max-width: 768px) {
+  .hero-logo {
+    width: 60px; /* Menor em mobile */
+    top: 6rem;
+    left: 5%;
+  }
+}
+
+/* =========================
    CARROSSEL
 ========================= */
 .carousel-section {
   background: var(--cor-primaria);
-  padding: 3.5rem 0;
+  padding: 1.5rem 0;
   overflow: hidden;
 }
 
@@ -121,8 +219,8 @@ body {
 
 .carousel-track {
   display: flex;
-  gap: 4rem;
-  animation: scroll 30s linear infinite;
+  gap: 2rem;
+  animation: scroll 10s linear infinite;
 }
 
 @keyframes scroll {
@@ -134,8 +232,8 @@ body {
   white-space: nowrap;
   color: var(--cor-branco);
   font-size: 1.2rem;
-  padding-left: 2rem;
-  border-left: 2px solid var(--cor-destaque);
+  padding-left: 4rem;
+  border-left: 1px solid var(--cor-destaque);
 }
 
 /* =========================
@@ -225,22 +323,6 @@ section {
 .area-card p {
   font-size: 1.2rem;
 }
-
-/* =========================
-   DEPOIMENTOS
-========================= */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-}
-
-.testimonial-card {
-  background: var(--cor-branco);
-  padding: 3rem;
-  border-radius: 6px;
-}
-
 /* =========================
    CTA
 ========================= */
